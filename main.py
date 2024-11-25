@@ -17,7 +17,6 @@ print(Fore.RED + r"""
                                                         Github: Mostafizur-Rahman8391
       """)
 
-# Function: Google Search
 def google_search(query):
     print(Fore.CYAN + "\n[+] Performing Google Search...")
     url = f"https://www.google.com/search?q={query.replace(' ', '+')}"
@@ -46,7 +45,6 @@ def google_search(query):
     except Exception as e:
         return [["Error occurred", str(e), "N/A"]]
 
-# Function: IP Geolocation
 def ip_lookup(ip):
     print(Fore.CYAN + "\n[+] Performing IP Lookup...")
     url = f"http://ip-api.com/json/{ip}"
@@ -88,16 +86,13 @@ def username_lookup(username):
             status = "Error"
         results.append([platform, url, status])
 
-    # If no results, show a message
     if not results:
         results.append(["N/A", "N/A", "No Results"])
 
-    # Use `display_table` for consistent output
     headers = ["Platform", "URL", "Status"]
     display_table("Username Lookup Results", results, headers)
 
 
-# Function: Email Lookup
 def email_lookup(email):
     print(Fore.CYAN + "\n[+] Performing Email Lookup...")
     try:
@@ -111,7 +106,6 @@ def email_lookup(email):
     except Exception as e:
         return {"Error": str(e)}
 
-# Function: Exif Data Extraction
 def exif_data_extraction(image_path):
     print(Fore.CYAN + "\n[+] Extracting Exif Data...")
     try:
@@ -121,13 +115,11 @@ def exif_data_extraction(image_path):
     except Exception as e:
         return {"Error": str(e)}
 
-# Display Table
 def display_table(title, data, headers):
     table_data = [headers] + data
     table = SingleTable(table_data, title)
     print(Fore.YELLOW + table.table)
 
-# Main Function
 def main():
     while True:
         print(Fore.GREEN + "\nChoose an option:")
