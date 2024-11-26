@@ -1,0 +1,44 @@
+# Ignore Python bytecode files
+*.pyc
+*.pyo
+__pycache__/
+
+# Ignore distribution files (build artifacts, dist, etc.)
+dist/
+build/
+*.egg-info/
+
+# Ignore virtual environment directories
+venv/
+env/
+.venv/
+
+# Ignore IDE/editor files
+.idea/
+.vscode/
+
+# Ignore Python testing directories and logs
+*.log
+*.tox/
+*.coverage
+*.hypothesis/
+.coverage/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore configuration files
+*.sqlite3
+*.bak
+
+# Ignore package manager files
+Pipfile.lock
+poetry.lock
+
+# Ignore configuration for pyinstaller (if used)
+*.spec
+
+# Ignore any other files you don't want to upload
+*.tar.gz
+*.zip

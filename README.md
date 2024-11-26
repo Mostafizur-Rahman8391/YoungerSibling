@@ -21,24 +21,37 @@ YoungerSibling is a Python-based terminal utility script designed for educationa
 
 ## **Installation**
 
+To install the `youngersibling` package, follow these steps:
+
+### Using pip from PyPI
+
+You can install `youngersibling` directly from PyPI using pip:
+
+```bash
+$ pip install youngersibling
+```
+### From Source
+If you'd like to install youngersibling from the source code, follow these steps:
+
 1. Clone the repository:
    ```bash
    $ git clone https://github.com/Mostafizur-Rahman8391/YoungerSibling.git
-   $ cd YoungerSibling
    ```
-2. Install Required Modules
+2. Navigate to project folder
+```bash
+$ cd YoungerSibling
+```
+3. Install the package:
    ```bash
-   $ pip install -r requirements.txt
-   or manually,
-   $ pip install requests beautifulsoup4 dnspython exifread terminaltables colorama
-    ```
+   $ pip install .
+   ```
 ## **Usage**
 
-After installation, you can run the script by navigating to the folder containing the script and executing it using Python.
+After installation, you can run the script by typing `youngersibling` in your command-line terminal
 
 ### 1. **Run the Script**
    ```bash
-   $ python main.py
+   $ youngersibling
    ```
 ### 2. **Available Options**
 After launching the script, you will be presented with a menu of options:
