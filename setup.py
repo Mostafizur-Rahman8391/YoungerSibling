@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="youngersibling",  # PyPI package name
-    version="1.1",
+    version="1.1.5",
     description="An educational OSINT toolkit for research and analysis.",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
@@ -17,7 +17,8 @@ setup(
         "colorama",
         "terminaltables",
         "dnspython",
-        "exifread"
+        "exifread",
+        "tqdm",
     ],
     entry_points={
         "console_scripts": [
@@ -30,4 +31,7 @@ setup(
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.7",
+        package_data={
+        "youngersibling": ["data.json"],  # Include the data.json file in the package
+    },
 )

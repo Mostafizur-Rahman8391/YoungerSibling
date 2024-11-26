@@ -1,3 +1,4 @@
+import os
 import requests
 from bs4 import BeautifulSoup
 from terminaltables import SingleTable
@@ -8,6 +9,7 @@ from tqdm import tqdm
 import json
 from concurrent.futures import ThreadPoolExecutor
 
+
 init(autoreset=True)
 
 print(Fore.CYAN + r"""
@@ -15,7 +17,7 @@ print(Fore.CYAN + r"""
  \ \ / /__ _  _ _ _  __ _ ___ _ _/ __(_) |__| (_)_ _  __ _ 
   \ V / _ \ || | ' \/ _` / -_) '_\__ \ | '_ \ | | ' \/ _` |
    |_|\___/\_,_|_||_\__, \___|_| |___/_|_.__/_|_|_||_\__, |
-                    |___/                            |___/ Version: 1.1
+                    |___/                            |___/ Version: 1.1.5
                                                         Developer: Mostafizur Rahman
                                                         Github: Mostafizur-Rahman8391
       """)
@@ -69,10 +71,13 @@ def ip_lookup(ip):
         return {"Error": str(e)}
 def username_lookup(username, json_file="data.json", threads=10):
     print(Fore.CYAN + f"\n[+] Performing Username Lookup for '{username}'...\n" + Style.RESET_ALL)
+    current_dir = os.path.dirname(os.path.abspath(__file__))
     
+    json_path = os.path.join(current_dir, json_file)
+                                  
     # Load platforms from Sherlock's JSON
     try:
-        with open(json_file, "r") as file:
+        with open(json_path, "r") as file:
             platforms = json.load(file)
     except FileNotFoundError:
         print(Fore.RED + "Error: JSON file not found!" + Style.RESET_ALL)
