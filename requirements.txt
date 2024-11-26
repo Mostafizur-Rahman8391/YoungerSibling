@@ -4,3 +4,4 @@ terminaltables
 colorama
 dnspython
 exifread
+tqdm

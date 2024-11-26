@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="youngersibling",  # PyPI package name
-    version="1.0.1",
+    version="1.1",
     description="An educational OSINT toolkit for research and analysis.",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",

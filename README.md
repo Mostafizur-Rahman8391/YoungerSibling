@@ -6,10 +6,11 @@ YoungerSibling is a Python-based terminal utility script designed for educationa
 ## **Features**
 - **Google Search**: Perform web searches from the terminal.
 - **IP Lookup**: Get geolocation information about an IP address.
-- **Username Lookup**: Check if a username exists across popular social media platforms.
+- **Username Lookup**: Check if a username exists across 400+ social media platforms, faster and more accurate than any other tool to ever exist.
 - **Email Lookup**: Get Mail Exchange (MX) records for an email domain.
 - **Exif Data Extraction**: Extract and display EXIF metadata from image files.
-
+## **New Feature: Username Lookup**
+The username lookup feature is enhanced to provide faster and more accurate results than traditional tools like Sherlock. It scans over 400+ platforms for username availability and ensures high accuracy by analyzing the actual content of user profiles. With optimized performance, this tool makes username lookups quicker and more reliable, all from the terminal.
 ## **Technologies Used**
 - **Python**: The main programming language used to create the script.
 - **Requests**: For making HTTP requests for data fetching.
@@ -38,9 +39,9 @@ If you'd like to install youngersibling from the source code, follow these steps
    $ git clone https://github.com/Mostafizur-Rahman8391/YoungerSibling.git
    ```
 2. Navigate to project folder
-```bash
-$ cd YoungerSibling
-```
+   ```bash
+   $ cd YoungerSibling
+   ```
 3. Install the package:
    ```bash
    $ pip install .

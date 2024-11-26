@@ -4,15 +4,18 @@ from terminaltables import SingleTable
 from colorama import Fore, Style, init
 import dns.resolver
 import exifread
+from tqdm import tqdm
+import json
+from concurrent.futures import ThreadPoolExecutor
 
 init(autoreset=True)
 
-print(Fore.RED + r"""
+print(Fore.CYAN + r"""
  __   __                          ___ _ _    _ _           
  \ \ / /__ _  _ _ _  __ _ ___ _ _/ __(_) |__| (_)_ _  __ _ 
   \ V / _ \ || | ' \/ _` / -_) '_\__ \ | '_ \ | | ' \/ _` |
    |_|\___/\_,_|_||_\__, \___|_| |___/_|_.__/_|_|_||_\__, |
-                    |___/                            |___/ Version: 1.0.2
+                    |___/                            |___/ Version: 1.1
                                                         Developer: Mostafizur Rahman
                                                         Github: Mostafizur-Rahman8391
       """)
@@ -64,33 +67,90 @@ def ip_lookup(ip):
             return {"Error": f"Failed to fetch data (Status code: {response.status_code})"}
     except Exception as e:
         return {"Error": str(e)}
-def username_lookup(username):
+def username_lookup(username, json_file="data.json", threads=10):
     print(Fore.CYAN + f"\n[+] Performing Username Lookup for '{username}'...\n" + Style.RESET_ALL)
+    
+    # Load platforms from Sherlock's JSON
+    try:
+        with open(json_file, "r") as file:
+            platforms = json.load(file)
+    except FileNotFoundError:
+        print(Fore.RED + "Error: JSON file not found!" + Style.RESET_ALL)
+        return
+    except json.JSONDecodeError:
+        print(Fore.RED + "Error: Invalid JSON file format!" + Style.RESET_ALL)
+        return
 
-    platforms = {
-        "Twitter": f"https://twitter.com/{username}",
-        "Instagram": f"https://instagram.com/{username}",
-        "Facebook": f"https://facebook.com/{username}",
-        "GitHub": f"https://github.com/{username}",
-        "LinkedIn": f"https://www.linkedin.com/in/{username}",
-        "TikTok": f"https://www.tiktok.com/@{username}",
-        "YouTube": f"https://www.youtube.com/@{username}"
-    }
+    found_results = []
+    total_checked = 0
+    platform_items = list(platforms.items())  # Convert dict to list for iteration
 
-    results = []
-    for platform, url in platforms.items():
-        try:
-            response = requests.get(url, timeout=5)
-            status = "Found" if response.status_code == 200 else "Not Found"
-        except requests.RequestException:
-            status = "Error"
-        results.append([platform, url, status])
+    # Not found phrases
+    not_found_keywords = [
+        "not found",
+        "this page doesn't exist",
+        "user not found",
+        "404",
+        "page not found",
+        "no user",
+        "account not found",
+        "oops",
+        "not a registered member",
+        "Why not register it?",
+        "centralauth-admin-nonexistent",
+        "нет такого участника",
+        "is still available",
+    ]
 
-    if not results:
-        results.append(["N/A", "N/A", "No Results"])
+    # Progress bar for tracking
+    progress_bar = tqdm(total=len(platform_items), desc="Checking platforms")
 
-    headers = ["Platform", "URL", "Status"]
-    display_table("Username Lookup Results", results, headers)
+    def check_platform(platform_item):
+        nonlocal total_checked
+        platform_name, platform_data = platform_item
+        if isinstance(platform_data, dict):
+            url = platform_data.get("url", "").format(username)
+            if not url:
+                progress_bar.update(1)
+                return
+
+            try:
+                response = requests.get(url, timeout=5)
+                total_checked += 1
+
+                if response.status_code == 200:
+                    # Parse the page content with BeautifulSoup
+                    soup = BeautifulSoup(response.text, "html.parser")
+                    page_text = soup.get_text().lower()
+
+                    # Check if the username or relevant information is present
+                    if username.lower() in page_text:
+                        # Check if any "not found" keyword is present
+                        if any(keyword in page_text for keyword in not_found_keywords):
+                            progress_bar.update(1)
+                            return
+                        found_results.append([platform_name, url])
+
+            except requests.RequestException:
+                pass  # Ignore errors (timeout, connection issues)
+
+        progress_bar.update(1)  # Update progress bar
+
+    # Use ThreadPoolExecutor to make requests concurrently
+    with ThreadPoolExecutor(max_workers=threads) as executor:
+        executor.map(check_platform, platform_items)
+
+    progress_bar.close()
+
+    # Display results
+    if found_results:
+        print(Fore.GREEN + f"\n[+] Found {len(found_results)} accounts for '{username}':" + Style.RESET_ALL)
+        headers = ["Platform", "URL"]
+        display_table("Available Accounts", found_results, headers)
+    else:
+        print(Fore.YELLOW + f"\n[!] No accounts found for '{username}'." + Style.RESET_ALL)
+
+    print(Fore.CYAN + f"\n[+] Checked {total_checked} platforms." + Style.RESET_ALL)
 
 
 def email_lookup(email):
@@ -126,7 +186,7 @@ def main():
         print("1. Google Search")
         print("2. IP Lookup")
         print("3. Email Lookup")
-        print("4. Username Lookup")
+        print("4. Username Lookup(Enhanced)")
         print("5. Exif Data Extraction")
         print("6. Exit")
 
