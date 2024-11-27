@@ -6,6 +6,7 @@ __pycache__/
 # Ignore distribution files (build artifacts, dist, etc.)
 dist/
 build/
+old/
 *.egg-info/
 
 # Ignore virtual environment directories

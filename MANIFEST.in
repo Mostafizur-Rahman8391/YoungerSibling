@@ -1,1 +1,3 @@
-include data.json
+# MANIFEST.in
+recursive-include youngersibling *.py
+include youngersibling/data.json
