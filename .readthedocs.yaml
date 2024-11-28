@@ -11,5 +11,5 @@ sphinx:
 
 python:
   install:
-    - pip:
-        - youngersibling
+    - method: "pip"
+      path: "."  # This installs the package from the current directory where setup.py is located.
