@@ -1,15 +1,10 @@
 version: 2
 
-build:
-  os: ubuntu-22.04
-  image: "latest"
-  tools:
-    python: "3.9"
-
-sphinx:
-  configuration: docs/source/conf.py
-
 python:
+  version: 3.9
   install:
     - method: "pip"
       path: "."  # This installs the package from the current directory where setup.py is located.
+
+sphinx:
+  configuration: docs/source/conf.py
