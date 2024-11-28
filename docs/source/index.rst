@@ -36,12 +36,13 @@ Ready to dive in? Follow these steps to install and start using YoungerSibling:
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+   :glob:
    :titlesonly:
 
-   installation
-   usage
-   features
-   faq
+   installation.rst
+   usage.rst
+   features.rst
+   faq.rst
 
 📧 **Contact Us**:
 -----------------
