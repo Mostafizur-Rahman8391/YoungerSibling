@@ -3,8 +3,8 @@ version: 2
 python:
   version: 3.9
   install:
-    - method: "pip"
-      path: "."  # This installs the package from the current directory where setup.py is located.
+    - method: pip
+      path: "."  # Use setup.py to install the package.
 
 sphinx:
   configuration: docs/source/conf.py
