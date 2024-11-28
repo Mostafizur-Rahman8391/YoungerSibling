@@ -24,6 +24,8 @@ YoungerSibling is crafted with precision to help you:
 Ready to dive in? Follow these steps to install and start using YoungerSibling:
 - Check out our detailed :doc:`installation` guide.
 - Learn how to use the tools in our :doc:`usage` section.
+- Explore the powerful features of YoungerSibling in the :doc:`features` guide.
+- Have questions? Check out our :doc:`faq` section for answers.
 
 📁 **Table of Contents**:
 
@@ -34,6 +36,9 @@ Ready to dive in? Follow these steps to install and start using YoungerSibling:
 
    installation
    usage
+   features
+   faq
+
 
 📧 **Contact Us**:
 Got questions, suggestions, or feedback? Feel free to reach out:
