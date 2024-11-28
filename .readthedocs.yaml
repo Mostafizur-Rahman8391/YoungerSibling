@@ -20,3 +20,4 @@ python:
 # Sphinx configuration
 sphinx:
   configuration: docs/source/conf.py
+
