@@ -9,5 +9,6 @@ build:
   os: ubuntu-22.04
   tools:
     python: "3.12"
+    requirements: "docs/source/requirements.txt"
 sphinx:
   configuration: docs/source/conf.py
