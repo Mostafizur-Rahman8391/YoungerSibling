@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 version: 2
 
 build:
@@ -12,3 +13,21 @@ python:
 
 sphinx:
   configuration: docs/source/conf.py
+=======
+# .readthedocs.yaml
+
+# Basic configuration for Read the Docs
+version: 2
+
+# Build tools and settings
+build:
+  os: ubuntu-22.04
+  tools:
+    python: "3.9"  # Specify Python version
+
+# Python dependencies
+python:
+  install:
+    - method: pip
+      path: .  # Install your package in the Read the Docs environment
+>>>>>>> fd16ec9cad7557b4dd74cbfebd4225e51029bedd
